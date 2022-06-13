@@ -80,10 +80,10 @@ public class User implements Serializable {
   public void setAddress(String address) { this.address = address; }
   public String getPhone() { return phone; }
   public void setPhone(String phone) { this.phone = phone; }
-  public String getUsername() {
+  public String getUserName() {
     return userName;
   }
-  public void setUsername(String userName) {
+  public void setUserName(String userName) {
     this.userName = userName;
   }
   public String getUserPass() {

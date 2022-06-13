@@ -21,7 +21,7 @@ public class UserDTO {
     }
 
     public UserDTO(User user) {
-        this.username = user.getUsername();
+        this.username = user.getUserName();
         if (user.getPhone() != null){
             this.phone = user.getPhone();
         }
