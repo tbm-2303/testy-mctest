@@ -1,8 +1,10 @@
 package rest;
 
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import dtos.UserDTO;
 import entities.Role;
 import entities.User;
 
@@ -42,6 +44,7 @@ public class DemoResource {
 
     @Context
     SecurityContext securityContext;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -152,4 +155,22 @@ public class DemoResource {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
+
+
+
+
+
+
+
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("users")
+    //@RolesAllowed("user")
+    public String getAllUsers() {
+        List<UserDTO> userDTOList = FACADE.getAllUsers();
+        return GSON.toJson(userDTOList);
+    }
+
 }

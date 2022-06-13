@@ -25,16 +25,28 @@ public class User implements Serializable {
   @NotNull
   @Column(name = "user_name", length = 25)
   private String userName;
+
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 255)
   @Column(name = "user_pass")
   private String userPass;
+
   @JoinTable(name = "user_roles", joinColumns = {
     @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
+
+  @ManyToMany
+  private List<Boat> boats;
+
+  private String address;
+
+  private String phone;
+
+  private String name;
+
 
   public List<String> getRolesAsStrings() {
     if (roleList.isEmpty()) {
@@ -60,31 +72,32 @@ public class User implements Serializable {
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
   }
 
-
-  public String getUserName() {
+  public String getName() { return name; }
+  public void setName(String name) { this.name = name; }
+  public List<Boat> getBoats() { return boats; }
+  public void setBoats(List<Boat> boats) { this.boats = boats; }
+  public String getAddress() { return address; }
+  public void setAddress(String address) { this.address = address; }
+  public String getPhone() { return phone; }
+  public void setPhone(String phone) { this.phone = phone; }
+  public String getUsername() {
     return userName;
   }
-
-  public void setUserName(String userName) {
+  public void setUsername(String userName) {
     this.userName = userName;
   }
-
   public String getUserPass() {
     return this.userPass;
   }
-
   public void setUserPass(String userPass) {
     this.userPass = userPass;
   }
-
   public List<Role> getRoleList() {
     return roleList;
   }
-
   public void setRoleList(List<Role> roleList) {
     this.roleList = roleList;
   }
-
   public void addRole(Role userRole) {
     roleList.add(userRole);
   }
